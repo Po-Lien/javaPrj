@@ -3,8 +3,113 @@
         <mat-icon style="color: #FFFFFF">speaker_notes</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-        <li>
-            1
-        </li>
+  <head>
+      
+    <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <style>
+    .test1{width:200px;padding:25px;border:5px solid gray;}
+    .test2{width:190px;padding:10px;border:2px solid gray;}
+    </style>
+    
+  </head>
+
+  <body>
+    <div class="test1">
+    <div class="test2">
+    <div id="show"></div>
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;<br>
+    ID：<input id="name" style="width:100px;height:20px;"/><br />
+    留言：<input id="content"  placeholder="請輸入您的留言" style="width:200px;height:80px;" /><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;<br>
+    <button id="btn">送出</button>
+    <br />
+    </div>
+  </body>
+
+
+  <script>
+    var firebase;
+    $(function () {
+      var $name = $("#name"),
+        $content = $("#content"),
+        $btn = $("#btn"),
+        $show = $("#show"),
+        ms = new Date().getTime();
+      var config = {
+        databaseURL: "https://chatroom-86f77.firebaseio.com/",
+      };
+      firebase.initializeApp(config);
+      var database = firebase.database().ref();
+
+      $btn.on("click", write);
+      $content.on("keydown", function (e) {
+        if (e.keyCode == 13) {
+          write();
+        }
+      });
+
+      function write() {
+        var date = new Date();
+        var h = date.getHours();
+        var m = date.getMinutes();
+        var s = date.getSeconds();
+        if (h < 10) {
+          h = "0" + h;
+        }
+        if (m < 10) {
+          m = "0" + m;
+        }
+        if (s < 10) {
+          s = "0" + s;
+        }
+        var now = h + ":" + m + ":" + s;
+        var postData = {
+          name: $("#name").val(),
+          content: $("#content").val(),
+          time: now,
+          id: "id" + ms,
+        };
+        database.push(postData);
+        $content.val("");
+      }
+
+      database.once("value", function (snapshot) {
+        $show.html("");
+        for (var i in snapshot.val()) {
+          $show.prepend(
+            "<div><div>" +
+              snapshot.val()[i].name +
+              "：" +
+              snapshot.val()[i].content +
+             "&nbsp;&nbsp;&nbsp;&nbsp;" +
+              snapshot.val()[i].time +
+              "</div>"
+          );
+        }
+      });
+
+      database.limitToLast(1).on("value", function (snapshot) {
+        for (var i in snapshot.val()) {
+          $show.prepend(
+            "<div><div>" +
+              snapshot.val()[i].name +
+              "：" +
+              snapshot.val()[i].content +
+             "&nbsp;&nbsp;&nbsp;&nbsp;" +
+              snapshot.val()[i].time +
+              "</div>"
+          );
+        }
+        $show.find(".id" + ms).css({
+          color: "#f00",
+        });
+        $show.find(".id" + ms + " div").css({
+          color: "#f00",
+        });
+      });
+    });
+  </script>
     </mat-menu>
 </div>
