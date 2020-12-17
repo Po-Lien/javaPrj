@@ -1,0 +1,132 @@
+a {
+    text-decoration: none !important;
+    cursor: default !important;
+}
+
+.create-venu-tab {
+    height: 100%;
+    background: #fff;
+    z-index: 2;
+    position: relative;
+}
+.create-venu-tab-back {
+    display: block;
+    left: 0;
+    width: 60px;
+    height: 55px;
+    background: no-repeat center;
+    background-size: 24px 24px;
+    cursor: pointer;
+    z-index: 5;
+}
+
+mat-icon {
+    background-repeat: no-repeat;
+    display: block;
+    fill: currentColor;
+    height: 24px;
+    width: 24px;
+}
+
+::ng-deep.mat-icon-button {
+    line-height: 10px;
+}
+
+.mat-tab-header {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active {
+    height: 55px !important;
+    min-height: 5px!important;
+    margin: 0px!important;
+    margin-left: 2px!important;
+    width: 99px!important;
+    min-width: 5px!important;
+  }
+
+.my-collections-list {
+    width: 100%;
+    padding: 0px;
+}
+
+.search-box-city-group {
+    position: relative;
+}
+
+.search-box-city-icon {
+    background: no-repeat;
+    background-size: 100%;
+    left: 8px;
+    top: 12px;
+    display: block;
+    width: 6px;
+    height: 14px;
+    position: absolute;
+    z-index: 2;
+}
+
+.search-box-city {
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 55px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin-bottom: 8px;
+    padding-left: 32px;
+    position: relative;
+}
+
+.mat-tab-body-wrapper{
+    padding: 4px 8px;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 16px;
+    background: #fff;
+    width: 100%;
+    height: 600px;
+    overflow: auto;
+}
+
+.search-box {
+    border: 1px solid #ccc;
+    padding: 4px 8px;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 3px;
+    background: #fff;
+    width: 82%;
+    height: calc(100% - 48px);
+    overflow: auto;
+}
+
+.search-box-text {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.button {
+    position: relative;
+    margin-left: 4px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}

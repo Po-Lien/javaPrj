@@ -1,0 +1,16 @@
+.trip-list {
+    z-index: 1000;
+    position: fixed;
+    margin: 16px;
+    margin-top: 16px;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 360px;
+    height: calc(100% - 88px);
+    background: #f4f4f4;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: margin-top 0.3s ease-in;
+    top: 62px;
+
+    
+}

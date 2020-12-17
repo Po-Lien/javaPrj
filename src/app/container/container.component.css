@@ -1,0 +1,35 @@
+.sidenav-container{
+    position: absolute;
+    top: 56px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: #ccc;
+    z-index: 0;
+}
+
+.map-container {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 30px;
+  }
+  
+  .map-frame {
+    height: 100%;
+    z-index: -5;
+  }
+  
+  #map {
+    height: 100%;
+  }
+
+
+  .leaflet-touch .leaflet-control-layers,
+  .leaflet-touch .leaflet-bar {
+    border: 2px solid rgba(0,0,0,0.2);
+    background-clip: padding-box;
+    display: none;
+  }

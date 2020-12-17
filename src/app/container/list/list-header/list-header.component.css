@@ -1,0 +1,149 @@
+.trip-list-header-info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    position: relative;
+    padding-top: 20px;
+}
+
+.trip-list-header-content {
+    width: 100%;
+}
+
+.trip-list-member {
+    margin: 8px 0px;
+}
+
+.trip-list-header-date {
+    margin: 8px 0px;
+    color: #666;
+    font-size: 14px;
+}
+
+.trip-list-header-back {
+    width: 48px;
+}
+
+.trip-list-header-title {
+    margin: 0;
+    font-size: 20px;
+    width: calc(100% - 90px);
+    font-weight: bold;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 2px solid rgba(0,0,0,0);
+    word-wrap: break-word;
+    border-width: 0px
+}
+
+.trip-list-header-edit {
+    position: absolute;
+    top: 28px;
+    right: 16px;
+    margin-top: 4px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: right;
+}
+
+.edit {
+    position: absolute;
+    top: 28px;
+    right: 60px;
+    margin-top: 4px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: right;
+}
+
+.trip-list-header-day-container {
+    width: 100%;
+    height: 48px;
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid #ccc;
+    -webkit-box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+    z-index: 500;
+}
+::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active {
+    height: 41px !important;
+    min-height: 5px!important;
+    margin: 3px!important;
+    width: 90px!important;
+    min-width: 5px!important;
+    font-size: 15px;
+  }
+
+
+.trip-list-header-title.edit-mode {
+    border-bottom: 1px solid #222;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #222;
+}
+
+input[type='date'] {
+    display: inline-block;
+    font-size: 1em;
+    color: #222;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #222;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    background: transparent;
+    border-radius: 0;
+}
+
+.trip-list-header-title-container {
+    margin: 0;
+    width: calc(100% - 140px);
+}
+
+input{
+    font-family: "Roboto", sans-serif;
+}
+
+.delete {
+    border-radius: 12px;
+    background-size: 100%;
+    position: absolute;
+    bottom: -27px;
+    left: 50%;
+    margin-left: -20px;
+}
+
+.trip-list-header-day-container.edit-mode {
+    width: 100%;
+    height: 83px;
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid #ccc;
+    -webkit-box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+    z-index: 500;
+}
+
+.mat-tab-label-edit-mode, .mat-tab-label-active-edit-mode {
+    height: 76px !important;
+    min-height: 5px!important;
+    margin: 3px!important;
+    width: 90px!important;
+    min-width: 5px!important;
+    font-size: 15px;
+  }
