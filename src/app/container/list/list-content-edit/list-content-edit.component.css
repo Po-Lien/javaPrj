@@ -1,0 +1,132 @@
+.trip-list-day-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.trip-list-day-header {
+    height: 56px;
+    padding: 16px 8px;
+    position: relative;
+}
+.trip-list-day-header-time {
+    margin-top: 4px;
+    font-size: 14px;
+    color: #666;
+}
+.trip-list-venu-container {
+    background: #fff;
+    padding: 8px 16px;
+    overflow: hidden;
+    -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    position: relative;
+}
+.trip-list-day-venu-time {
+    width: 56px;
+    position: absolute;
+    top: 50%;
+    left: 13px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    text-align: center;
+    font-size: 14px;
+}
+.trip-list-day-venu-info {
+    margin-left: 64px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    padding-right: 32px;
+}
+.trip-list-day-venu-number-1 {
+    background:no-repeat;
+    background-size: 100%;
+}
+.trip-list-day-venu-info-name {
+    margin-top: 24px;
+    font-size: 16px;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.trip-list-day-venu-info-time {
+    z-index: 99;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 14px;
+    color: #666;
+    background:no-repeat left;
+    background-size: 16px;
+    padding-left: 18px;
+}
+.trip-list-day-venu-info-address {
+    font-size: 14px;
+    color: #666;
+    margin-top: 4px;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    z-index: 99;
+}
+.add-venue {
+    margin-top: 16px;
+    text-align: center;
+    background: white;
+    height: 43px;
+    -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.trip-list-day-header h3 {
+    float: left;
+    font-size: 16px;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+    margin-bottom: 0px;
+}
+
+.trip-list-day-venu-time span {
+    display: block;
+}
+
+.trip-list-day-venu-number {
+    width: 26px;
+    height: 26px;
+    margin: 0 auto;
+    color: #fff;
+    font-size: 12px;
+    padding-top: 4px;
+    overflow: hidden;
+}
+
+div.add-venue div {
+    color: #999;
+    font-size: 16px;
+    line-height: 43px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+nav a {
+    padding: 5px 10px;
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+    background-color: #eee;
+    border-radius: 4px;
+  }
+  nav a:visited, a:link {
+    color: #334953;
+    text-decoration: none !important;
+  }
+  nav a:hover {
+    color: #039be5;
+    background-color: #cfd8dc;
+  }
+  nav a.active {
+    color: #039be5;
+  }

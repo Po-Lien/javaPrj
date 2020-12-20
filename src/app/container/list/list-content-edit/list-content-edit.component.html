@@ -1,0 +1,33 @@
+<div class="trip-list-day-container" style="height: calc(100% - 175px);" *ngIf="isChecked">
+    <mat-card style="background-color:#f4f4f4; display:contents" *ngFor="let day of day">
+        <div>
+            <header class="trip-list-day-header" style="padding: 1px; left: 7px;">
+                <h3 class="" style="background: rgb(238, 60, 119); cursor: pointer;">{{day.day}}<span> : </span>星期四</h3>
+                <div class="trip-list-day-header-time" style="margin-top: 21px;">出發時間 : <b class="">{{day.startTime}}</b>
+                </div>
+            </header>
+        </div>
+        <div>
+            <div>
+                <div class="trip-list-venu-container" *ngIf="day.place.length != ''">
+                    <div class="trip-list-day-venu-time"><span
+                            class="trip-list-day-venu-time-from">{{day.startTime}}</span><span
+                            class="trip-list-day-venu-number trip-list-day-venu-number-1"><mat-icon color="primary">place</mat-icon></span><span
+                            class="trip-list-day-venu-time-to">{{day.endTime}}</span></div>
+                    <div class="trip-list-day-venu-info">
+                        <div class="trip-list-day-venu-info-name" itemprop="name">{{day.place}}</div>
+                        <div class="trip-list-day-venu-info-time trip-list-day-venu-info-time-background"><span>
+                            {{day.forcastTime}}</span></div>
+                        <div class="trip-list-day-venu-info-address" itemprop="address">{{day.address}}
+                        </div>
+                    </div>
+                </div>
+                <div class="add-venue" style="margin-top: 17px;">
+                    <div>
+                        <a routerLink="/search" skipLocationChange>+ 新增景點</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</div>
