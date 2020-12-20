@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +9,22 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   visible: boolean = false;
+  isAuthenticated: boolean;
 
   @Output() toggle: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor( private authService: AuthService) { 
+    this.authService.isAuthenticated.subscribe(
+      (isAuthenticated: boolean) => this.isAuthenticated = isAuthenticated
+    );
+  }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.isAuthenticated = await this.authService.checkAuthenticated();
+  }
+
+  logout() {
+    this.authService.logout('/login');
   }
 
   emit(){

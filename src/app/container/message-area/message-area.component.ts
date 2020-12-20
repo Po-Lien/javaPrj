@@ -9,7 +9,12 @@ export class MessageAreaComponent implements OnInit {
 
   constructor() { }
 
+  opened:boolean = false;
+
   ngOnInit(): void {
   }
 
+  isopened(){
+    this.opened = !this.opened;
+  }
 }

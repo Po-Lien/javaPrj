@@ -1,4 +1,4 @@
-<div class="trip-list-header-info" *ngIf="!isChecked; else headerElse">
+<div class="trip-list-header-info" *ngIf="!isChecked">
     <div class="trip-list-header-back">
         <a herf="" style="cursor: pointer">
             <mat-icon>arrow_back</mat-icon>
@@ -11,7 +11,15 @@
         <span (click)="slideToggle.toggle()" style="cursor:pointer" class="edit">
             Edit
         </span>
-        <mat-slide-toggle #slideToggle class="trip-list-header-edit" color="primary" style="display: flex" [(ngModel)]="isChecked" (click)="emit()">
+        <mat-slide-toggle 
+            #slideToggle 
+            class="trip-list-header-edit" 
+            color="primary" 
+            style="display: flex" 
+            [(ngModel)]="isChecked" 
+            (click)="emit(); sendIsChecked()"
+            routerLink="/edit"
+            skipLocationChange>
             
         </mat-slide-toggle>
 
@@ -28,7 +36,7 @@
         </div>
     </div>
 </div>
-<mat-tab-group class="trip-list-header-day-container" *ngIf="!isChecked; else containerElse">
+<mat-tab-group class="trip-list-header-day-container" *ngIf="!isChecked">
     <mat-tab *ngFor="let day of day; let i = index">
         <ng-template mat-tab-label>
             {{ day.date}}
@@ -37,49 +45,4 @@
         </ng-template>
     </mat-tab>
 </mat-tab-group>
-<app-list-content [opened]="isChecked"></app-list-content>
-
-
-<ng-template #headerElse>
-    <div class="trip-list-header-info">
-        <div class="trip-list-header-back">
-            <a herf="" style="cursor: pointer">
-                <mat-icon>arrow_back</mat-icon>
-            </a>
-        </div>
-        <div class="trip-list-header-content">
-            <div class="trip-list-header-title-container">
-                <input type="text"class="trip-list-header-title edit-mode" value=Title [(ngModel)]="Title">
-            </div>
-            <span (click)="slideToggle.toggle()" style="cursor:pointer" class="edit">
-                Edit
-            </span>
-            <mat-slide-toggle #slideToggle class="trip-list-header-edit" color="primary" style="display: flex" (click)="emit()" [(ngModel)]="isChecked">
-                
-            </mat-slide-toggle>
-    
-            <p class="trip-list-header-date">
-                    <input type="date" value=dateFrom [(ngModel)] = dateFrom>  -  {{dateEnd}}
-            </p>
-            <div class="trip-list-member">
-                <button mat-icon-button style="text-align:left">
-                    <mat-icon style="font-size: 39px;">face</mat-icon>
-                </button>
-            </div>
-        </div>
-    </div>
-</ng-template>
-<ng-template #containerElse>
-    <mat-tab-group class="trip-list-header-day-container edit-mode">
-        <mat-tab *ngFor="let day of day; let i = index">
-            <ng-template mat-tab-label class="mat-tab-label-edit-mode; mat-tab-label-active-edit-mode">
-                {{ day.date}}
-                <br>
-                {{ day.day}}
-                <div class="delete">
-                    <button mat-icon-button><mat-icon style="line-height: 0px!important;">delete</mat-icon></button>
-                </div>
-            </ng-template>
-        </mat-tab>
-    </mat-tab-group>
-</ng-template>
+<router-outlet></router-outlet>

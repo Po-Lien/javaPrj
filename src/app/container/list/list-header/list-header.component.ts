@@ -1,8 +1,9 @@
-import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, Input } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { Title } from '@angular/platform-browser';
-import { scheduled } from 'rxjs';
+import { scheduled,Subscription } from 'rxjs';
 import { ListService } from '../list.service';
+import { day } from '../../../data/schedule';
 
 @Component({
   selector: 'app-list-header',
@@ -10,25 +11,49 @@ import { ListService } from '../list.service';
   styleUrls: ['./list-header.component.css']
 })
 export class ListHeaderComponent implements OnInit {
-  isChecked: boolean = false;
+  isChecked: boolean;
+  subscription: Subscription;
   Title: string = "Title";
   dateFrom: string = "2020-10-10";
   dateEnd: string = "2020-10-20";
 
   @Output() toggle: EventEmitter<any> = new EventEmitter();
 
-  encapsulation: ViewEncapsulation.None
+  constructor( private listService: ListService) {
+    // this.subscription = this.listService.getIsChecked().subscribe(isChecked => {
+    //   console.log(isChecked);
+    //   console.log(this.isChecked);
+    //   console.log(this.listService.isChecked);
+    //   this.listService.isChecked = this.isChecked;
+    //   this.isChecked=isChecked;
+    // })
 
-  constructor( private listService: ListService) { }
+    this.listService.sharedIsChecked.subscribe(isChecked => this.isChecked = isChecked);
+   }
+
+   sendIsChecked(): void {
+    //  this.listService.sendIsChecked(true);
+    //  console.log(this.listService.isChecked);
+    this.listService.isCheckedSubject.next(true);
+   }
 
   day = [];
 
   ngOnInit(): void {
     this.day = this.listService.getList();
   }
+ 
+  ngOnChanges(): void {
+   // this.listService.isChecked;
+    this.day = this.listService.getList();
+  }
 
-   emit(){
-     this.isChecked = !this.isChecked;
-     this.toggle.emit(MatButtonToggleChange);
-   }
+  emit(){
+    this.isChecked = !this.isChecked;
+    this.toggle.emit(MatButtonToggleChange);
+  }
+
+  // ngOnDestroy() {
+  //   this.subscription.unsubscribe();
+  // }
 }

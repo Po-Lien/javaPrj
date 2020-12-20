@@ -8,14 +8,14 @@ import { ListService } from '../list.service';
 })
 
 export class ListContentComponent implements OnInit {
-
-  @Input() opened = true;
+  isChecked: boolean;
+  //@Input() opened = true;
 
   constructor( private listService: ListService) { 
+    this.listService.sharedIsChecked.subscribe(isChecked => this.isChecked = isChecked);
   }
 
   day = [];
-  isChecked: string='';
   
   ngOnInit() {
     this.day = this.listService.getList();

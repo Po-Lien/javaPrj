@@ -10,6 +10,8 @@ import { ShareMaterialModule } from '../../share-material/share-material.module'
 
 import { ListRoutingModule } from './list-routing.module';
 import { SearchContentComponent } from './search-content/search-content.component';
+import { ListHeaderEditComponent } from './list-header-edit/list-header-edit.component';
+import { ListContentEditComponent } from './list-content-edit/list-content-edit.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { SearchContentComponent } from './search-content/search-content.componen
     ListHeaderComponent,
     ListContentComponent,
     SearchComponent,
-    SearchContentComponent
+    SearchContentComponent,
+    ListHeaderEditComponent,
+    ListContentEditComponent
   ],
   imports: [
     ShareMaterialModule,

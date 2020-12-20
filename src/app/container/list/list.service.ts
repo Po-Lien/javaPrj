@@ -1,7 +1,8 @@
 import { getLocaleDayNames } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { day } from 'src/app/data/schedule';
-import { Observable, Subject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { headerData } from '../../data/header';
 
 import { HttpClient, HttpResponse, HttpParams, HttpHeaders} from '@angular/common/http';
 import { Name } from '../../data/Name';
@@ -15,16 +16,22 @@ import { Name } from '../../data/Name';
   )
 
   export class ListService {
-    isChecked$:  Observable<any>;
-    private isCheckedSubject = new Subject<any>();
+
+    isChecked: boolean=false;
+    public isCheckedSubject = new BehaviorSubject<any>(this.isChecked);
+    sharedIsChecked = this.isCheckedSubject.asObservable();
+    headerData: headerData;
+
 
     constructor(private http: HttpClient){
-      this.isChecked$ = this.isCheckedSubject.asObservable();
     }
 
-    isChecked(data) {
-      console.log(data);
-      this.isCheckedSubject.next(data);
+    sendIsChecked(isChecked:boolean) {
+      this.isCheckedSubject.next(isChecked);
+    }
+
+    getIsChecked(): Observable<any>{
+      return this.isCheckedSubject.asObservable();
     }
 
     getList(){
@@ -88,6 +95,7 @@ import { Name } from '../../data/Name';
               address: ''
             }
           ]
+
           return day;
     }
 

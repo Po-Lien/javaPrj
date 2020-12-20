@@ -9,6 +9,8 @@ import 'leaflet-routing-machine';
 import'../../../node_modules/leaflet/dist/images/marker-icon-2x.png';
 import'../../../node_modules/leaflet/dist/images/marker-shadow.png';
 
+import { AuthService } from '../auth.service';
+
 
 @Component({
   selector: 'app-container',
@@ -17,9 +19,19 @@ import'../../../node_modules/leaflet/dist/images/marker-shadow.png';
 })
 export class ContainerComponent implements AfterViewInit {
 
-  constructor( private breakpointObserver: BreakpointObserver, private http: HttpClient) { }
-
   @Input() opened = true;
+  isAuthenticated: boolean;
+
+  constructor( 
+    private breakpointObserver: BreakpointObserver, 
+    private http: HttpClient,
+    private authService: AuthService) {
+    
+    this.authService.isAuthenticated.subscribe(
+      isAuthenticated => this.isAuthenticated = isAuthenticated
+    );
+    console.log(this.isAuthenticated);
+   }
 
   ngAfterViewInit(): void {
     this.initMap();

@@ -20,8 +20,11 @@ export class SearchComponent implements OnInit {
   filteredOptions: Observable<string[]>;
   myControlPlace = new FormControl();
   place: string[] = ['臺北市','新北市','宜蘭市','基隆市'];
+  isChecked: boolean;
 
-  constructor(private listService: ListService) { }
+  constructor(private listService: ListService) { 
+    listService.sharedIsChecked.subscribe(isChecked => this.isChecked = isChecked);
+  }
 
   ngOnInit(){
     this.filteredOptions = this.myControl.valueChanges.pipe(

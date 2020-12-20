@@ -1,4 +1,9 @@
-<a routerLink="" color="primary">
+<a routerLink="" skipLocationChange color="primary" *ngIf="!isChecked">
+    <button mat-button style="position: absolute; min-width: 39px;" class="create-venu-tab-back">
+        <mat-icon style="margin-left:4px;">arrow_back</mat-icon>
+    </button>
+</a>
+<a routerLink="/edit" skipLocationChange color="primary" *ngIf="isChecked">
     <button mat-button style="position: absolute; min-width: 39px;" class="create-venu-tab-back">
         <mat-icon style="margin-left:4px;">arrow_back</mat-icon>
     </button>
