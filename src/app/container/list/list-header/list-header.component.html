@@ -18,14 +18,14 @@
             style="display: flex" 
             [(ngModel)]="isChecked" 
             (click)="emit(); sendIsChecked()"
-            routerLink="/edit"
+            routerLink="/schedule/edit"
             skipLocationChange>
             
         </mat-slide-toggle>
 
         <div class="trip-list-header-date">
             <div style="width: calc(100% - 30px); display: inline-block;">
-                <div>{{dateFrom}}<span> - </span>{{dateEnd}}</div>
+                <div>{{fromDate}}<span> - </span>{{endDate}}</div>
             </div>
             
         </div>
@@ -45,4 +45,4 @@
         </ng-template>
     </mat-tab>
 </mat-tab-group>
-<router-outlet></router-outlet>
+<app-list-content [dayContent]="day"></app-list-content>

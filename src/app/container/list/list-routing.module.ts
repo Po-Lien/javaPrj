@@ -7,9 +7,13 @@ import { ListComponent } from './list.component';
 import { SearchContentComponent } from './search-content/search-content.component';
 import { ListHeaderEditComponent } from './list-header-edit/list-header-edit.component';
 import { ListContentEditComponent } from './list-content-edit/list-content-edit.component';
+import { ContainerComponent } from '../container.component';
 
 const listRoutes: Routes = [
   {
+    path: 'schedule',
+    component: ContainerComponent,
+    children: [{
     path: '',
     component: ListComponent,
     children: [
@@ -43,6 +47,7 @@ const listRoutes: Routes = [
           }
         ]
       }
+    ]}
     ]}
 ];
 

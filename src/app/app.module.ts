@@ -14,7 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListRoutingModule } from './container/list/list-routing.module';
 
 import { ShareMaterialModule } from './share-material/share-material.module';
-import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { LoginComponent } from './login/login.component';
     HeaderComponent,
     ContainerComponent,
     MessageAreaComponent,
-    LoginComponent
+    HomeComponent
   ],
   imports: [
     ReactiveFormsModule,

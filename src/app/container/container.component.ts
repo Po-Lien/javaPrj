@@ -10,7 +10,7 @@ import'../../../node_modules/leaflet/dist/images/marker-icon-2x.png';
 import'../../../node_modules/leaflet/dist/images/marker-shadow.png';
 
 import { AuthService } from '../auth.service';
-
+import { HeaderService } from '../header/header.service';
 
 @Component({
   selector: 'app-container',
@@ -19,18 +19,22 @@ import { AuthService } from '../auth.service';
 })
 export class ContainerComponent implements AfterViewInit {
 
-  @Input() opened = true;
+  //@Input() opened = true;
   isAuthenticated: boolean;
+  opened: boolean;
 
   constructor( 
     private breakpointObserver: BreakpointObserver, 
     private http: HttpClient,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private headerServie: HeaderService) {
     
     this.authService.isAuthenticated.subscribe(
       isAuthenticated => this.isAuthenticated = isAuthenticated
     );
     console.log(this.isAuthenticated);
+
+    this.headerServie.sharedSideNavSubject.subscribe( opened => this.opened = opened);
    }
 
   ngAfterViewInit(): void {

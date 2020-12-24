@@ -1,0 +1,9 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sideNav mode="side" [(opened)] = "opened" [mode]="(isHandset$ | async) ? 'over' : 'side'">
+        Left navigation!!
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="background">
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

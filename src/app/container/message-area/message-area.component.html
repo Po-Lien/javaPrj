@@ -1,32 +1,30 @@
-<div>
-  <button mat-icon-button [matMenuTriggerFor]="menu" class="comments-minimized">
+<button mat-icon-button class="comments-minimized" *ngIf="!opened" (click)="isOpened()">
       <mat-icon style="color: #FFFFFF">speaker_notes</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
+</button>
 <head>
     
   <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <style>
-  .test1{width:200px;padding:25px;border:5px solid gray;}
-  .test2{width:190px;padding:10px;border:2px solid gray;}
-  </style>
   
 </head>
 
-<body>
-  <div class="test1">
-  <div class="test2">
-  <div id="show"></div>
+<div class="comments-container comment-open" *ngIf="opened">
+  <div class="comments-container-header">
+    <mat-icon >speaker_notes</mat-icon>
+    <span style="position: fixed;">留言</span>
+    <mat-icon style="float: right; cursor: pointer;" (click)="isOpened()">remove</mat-icon>
   </div>
-  &nbsp;&nbsp;&nbsp;&nbsp;<br>
-  ID：<input id="name" style="width:100px;height:20px;"/><br />
-  留言：<input id="content"  placeholder="請輸入您的留言" style="width:200px;height:80px;" /><br />
-  &nbsp;&nbsp;&nbsp;&nbsp;<br>
-  <button id="btn">送出</button>
-  <br />
+  <div class="itinerary-comments-box">
+    &nbsp;&nbsp;&nbsp;&nbsp;<br>
+    ID：<input id="name" style="width:100px;height:20px;"/><br />
+    留言：<input id="content"  placeholder="請輸入您的留言" style="width:200px;height:80px;" /><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;<br>
+    <button id="btn">送出</button>
+    <br/>
   </div>
-</body>
+  <ul id="show" class="itinerary-comments-list"></ul>
+    
+</div>
 
 
 <script>
@@ -111,5 +109,3 @@
     });
   });
 </script>
-  </mat-menu>
-</div>

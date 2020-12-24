@@ -14,7 +14,8 @@ export class MessageAreaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  isopened(){
+  isOpened(){
     this.opened = !this.opened;
   }
+  
 }

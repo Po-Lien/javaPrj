@@ -8,17 +8,30 @@ import { ListService } from '../list.service';
 })
 
 export class ListContentComponent implements OnInit {
+  @Input() dayContent: [];
   isChecked: boolean;
-  //@Input() opened = true;
+  schedule: any;
+  tourism = [];
+  //i: number = 0;
+  tourismList = [];
+  tourismCheck;
 
   constructor( private listService: ListService) { 
     this.listService.sharedIsChecked.subscribe(isChecked => this.isChecked = isChecked);
+    listService.sharedDayTestSubject.subscribe( schedule => this.schedule = schedule);
+
+    this.schedule.day.forEach( list => this.tourism.push(
+      list.tourism
+      ));
   }
 
-  day = [];
+  // doTourismAdd(): void {
+  //   this.tourismList = this.tourism[this.i++];
+  //   if(this.tourismList != undefined)
+  //   this.tourismCheck = Object.values(this.tourismList[0])[3];
+  //  };
   
   ngOnInit() {
-    this.day = this.listService.getList();
   }
 
 }

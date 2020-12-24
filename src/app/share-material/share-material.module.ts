@@ -51,7 +51,8 @@ const materialMoudle = [
   MatFormFieldModule,
   MatAutocompleteModule,
   MatSelectModule,
-  MatInputModule
+  MatInputModule,
+  MatStepperModule
 ]
 
 @NgModule({

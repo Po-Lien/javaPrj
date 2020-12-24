@@ -1,0 +1,16 @@
+.background{
+    background-image: url(../../assets/images/1920_1080_20100325123542573797.jpg);
+    background-position: center center;
+    background-size: cover;
+    height: 100%;
+}
+
+.sidenav-container{
+    position: absolute;
+    top: 56px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: #FFFFFF;
+    z-index: 0;
+}

@@ -13,38 +13,47 @@ import { day } from '../../../data/schedule';
 export class ListHeaderComponent implements OnInit {
   isChecked: boolean;
   subscription: Subscription;
-  Title: string = "Title";
-  dateFrom: string = "2020-10-10";
-  dateEnd: string = "2020-10-20";
-
+  Title: string;
+  day = [];
+  dayTest: any;
+  date = [];
+  fromDate: string;
+  endDate: string;
+  selected: number;
+  index: number;
   @Output() toggle: EventEmitter<any> = new EventEmitter();
 
   constructor( private listService: ListService) {
-    // this.subscription = this.listService.getIsChecked().subscribe(isChecked => {
-    //   console.log(isChecked);
-    //   console.log(this.isChecked);
-    //   console.log(this.listService.isChecked);
-    //   this.listService.isChecked = this.isChecked;
-    //   this.isChecked=isChecked;
-    // })
 
     this.listService.sharedIsChecked.subscribe(isChecked => this.isChecked = isChecked);
+    this.listService.sharedTitleSubject.subscribe(title => this.Title = title);
+    this.listService.sharedDayTestSubject.subscribe(dayTest => this.dayTest = dayTest)
+
+    this.dayTest.day.map(list => this.day.push(
+        {
+          date: list.date,
+          day: list.day,
+          week: list.week
+        }
+      ));
+      
+      this.selected = this.day.length;
+      
+      this.day.forEach(list => this.date.push(list.date));
+      
+      this.fromDate = this.date[0];
+      this.endDate = this.date[this.selected - 1];
    }
 
    sendIsChecked(): void {
-    //  this.listService.sendIsChecked(true);
-    //  console.log(this.listService.isChecked);
     this.listService.isCheckedSubject.next(true);
    }
-
-  day = [];
+   
 
   ngOnInit(): void {
-    this.day = this.listService.getList();
   }
  
   ngOnChanges(): void {
-   // this.listService.isChecked;
     this.day = this.listService.getList();
   }
 
