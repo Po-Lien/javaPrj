@@ -9,8 +9,9 @@ import 'leaflet-routing-machine';
 import'../../../node_modules/leaflet/dist/images/marker-icon-2x.png';
 import'../../../node_modules/leaflet/dist/images/marker-shadow.png';
 
-import { AuthService } from '../auth.service';
 import { HeaderService } from '../header/header.service';
+import { AccountService } from '../_services';
+import { User } from '../_models';
 
 @Component({
   selector: 'app-container',
@@ -22,19 +23,16 @@ export class ContainerComponent implements AfterViewInit {
   //@Input() opened = true;
   isAuthenticated: boolean;
   opened: boolean;
+  user: User;
 
   constructor( 
     private breakpointObserver: BreakpointObserver, 
     private http: HttpClient,
-    private authService: AuthService,
-    private headerServie: HeaderService) {
+    private headerServie: HeaderService,
+    private accountService: AccountService) {
     
-    this.authService.isAuthenticated.subscribe(
-      isAuthenticated => this.isAuthenticated = isAuthenticated
-    );
-    console.log(this.isAuthenticated);
-
-    this.headerServie.sharedSideNavSubject.subscribe( opened => this.opened = opened);
+      this.user = this.accountService.userValue;
+      this.headerServie.sharedSideNavSubject.subscribe( opened => this.opened = opened);
    }
 
   ngAfterViewInit(): void {

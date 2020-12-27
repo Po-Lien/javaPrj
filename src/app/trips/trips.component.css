@@ -1,0 +1,26 @@
+.tab {
+    max-width: 960px;
+    margin: 40px auto 0 auto;
+}
+
+:host::ng-deep.mat-tab-label, :host::ng-deep.mat-tab-label-active {
+    font-size: 21px;
+  }
+
+.add-trip {
+    overflow: hidden;
+    padding: 8px;
+}
+
+:host::ng-deep.mat-raised-button {
+    display: flex !important;
+    align-items: center!important;
+    padding-left: 12px!important;
+    font-size: 16px !important;
+}
+
+:host::ng-deep.mat-card{
+    height: 100px !important;
+    width: 168px !important;
+    margin: 10px;
+}

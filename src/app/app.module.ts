@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,16 +15,24 @@ import { ListRoutingModule } from './container/list/list-routing.module';
 
 import { ShareMaterialModule } from './share-material/share-material.module';
 import { HomeComponent } from './home/home.component';
+import { TripsComponent } from './trips/trips.component';
+import { AlertComponent } from './account/alert/alert.component';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ContainerComponent,
     MessageAreaComponent,
-    HomeComponent
+    HomeComponent,
+    TripsComponent,
+    AlertComponent
   ],
   imports: [
+    FlexLayoutModule,
     ReactiveFormsModule,
     HttpClientModule,
     ShareMaterialModule,
@@ -35,7 +43,10 @@ import { HomeComponent } from './home/home.component';
     ListRoutingModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

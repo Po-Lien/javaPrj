@@ -11,14 +11,11 @@ export class ListContentEditComponent implements OnInit {
   isChecked: boolean;
   schedule: any;
   tourism = [];
-  //i: number = 0;
-  tourismList = [];
-  tourismCheck;
   constructor( private listService: ListService) {
     listService.sharedIsChecked.subscribe(isChecked => this.isChecked = isChecked);
     listService.sharedDayTestSubject.subscribe( schedule => this.schedule = schedule);
         
-    this.schedule.day.forEach( list => this.tourism.push(
+    this.schedule[0].day.forEach( list => this.tourism.push(
       list.tourism
       ));
     }

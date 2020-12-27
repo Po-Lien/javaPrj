@@ -1,31 +1,37 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button (click)="emit(); sendSideNav()">
-        <mat-icon>{{ visible ? 'close' : 'menu' }}</mat-icon>
-    </button>
-    <button mat-button routerLink="" style="font-size: 28px;">Journey</button>
-    <span class="expanded-toolbar"></span>
-    <div fxLayout="row" fxShow="false" fxShow-gt-sm>
-            <button mat-icon-button *ngIf="!isAuthenticated" routerLink="/account/login">
-                <mat-icon>login</mat-icon>
+    <mat-toolbar-row fxLayoutAlign="space-between center" >
+        <div>
+            <button mat-icon-button (click)="emit(); sendSideNav()" *ngIf="!deviceXs">
+                <mat-icon>{{ visible ? 'close' : 'menu' }}</mat-icon>
             </button>
-            <button mat-icon-button *ngIf="isAuthenticated" (click)="logout()">
-                <mat-icon>exit_to_app</mat-icon>
-            </button>
-    </div>
-    <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
-        <mat-icon>more_vert</mat-icon>
-    </button>
+            <button mat-button routerLink="" style="font-size: 30px;" *ngIf="(deviceLg || deviceXl)">Journey</button>
+        </div>
+        <div>
+            <button mat-button routerLink="" style="font-size: 30px;" *ngIf="!(deviceLg || deviceXl)">Journey</button>
+        </div>
+        <div>
+                <button mat-icon-button *ngIf="!user" routerLink="/account/login">
+                    <mat-icon>login</mat-icon>
+                </button>
+                <button mat-icon-button *ngIf="user" (click)="logout()">
+                    <mat-icon>exit_to_app</mat-icon>
+                </button>
+                <button mat-button *ngIf="deviceXs" [mat-menu-trigger-for]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+        </div>
+    </mat-toolbar-row>
 </mat-toolbar>
-<mat-menu x-position="before" #menu="matMenu">
+<mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="">
         <mat-icon>home</mat-icon>
         Home
     </button>
-    <button mat-menu-item *ngIf="!isAuthenticated" routerLink="/account/login">
+    <button mat-menu-item *ngIf="!user" routerLink="/account/login">
         <mat-icon>login</mat-icon>
         Login
     </button>
-    <button mat-menu-item *ngIf="isAuthenticated" (click)="logout()">
+    <button mat-menu-item *ngIf="user" (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         Logout
     </button>

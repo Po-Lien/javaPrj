@@ -13,6 +13,8 @@ import { SearchContentComponent } from './search-content/search-content.componen
 import { ListHeaderEditComponent } from './list-header-edit/list-header-edit.component';
 import { ListContentEditComponent } from './list-content-edit/list-content-edit.component';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 @NgModule({
   declarations: [
     ListComponent,
@@ -24,6 +26,7 @@ import { ListContentEditComponent } from './list-content-edit/list-content-edit.
     ListContentEditComponent
   ],
   imports: [
+    FlexLayoutModule,
     ShareMaterialModule,
     CommonModule,
     FormsModule,

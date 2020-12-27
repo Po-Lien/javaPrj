@@ -29,7 +29,7 @@ export class ListHeaderComponent implements OnInit {
     this.listService.sharedTitleSubject.subscribe(title => this.Title = title);
     this.listService.sharedDayTestSubject.subscribe(dayTest => this.dayTest = dayTest)
 
-    this.dayTest.day.map(list => this.day.push(
+    this.dayTest[0].day.map(list => this.day.push(
         {
           date: list.date,
           day: list.day,

@@ -15,9 +15,11 @@ a:link {
   }
 
   mat-card {
-    max-width: 400px;
+    max-width: 985px;
     margin: 2em auto;
     text-align: center;
+    box-shadow: none !important;
+
   }
   mat-form-field {
     display: block;
@@ -33,5 +35,5 @@ a:link {
     background-color: #009ece;;
     border-radius: 32px;
     width: 11%;
-    font-style: oblique;
+    font-style: revert;
   }

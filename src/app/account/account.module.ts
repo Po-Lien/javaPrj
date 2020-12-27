@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { AccountRoutingModule } from './account-routing.module';
@@ -11,6 +11,7 @@ import { ShareMaterialModule } from '../share-material/share-material.module';
 
 @NgModule({
     imports: [
+        FormsModule,
         ShareMaterialModule,
         CommonModule,
         ReactiveFormsModule,
@@ -19,7 +20,7 @@ import { ShareMaterialModule } from '../share-material/share-material.module';
     declarations: [
         AccountComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
     ]
 })
 export class AccountModule { }

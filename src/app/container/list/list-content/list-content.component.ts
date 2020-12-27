@@ -20,7 +20,7 @@ export class ListContentComponent implements OnInit {
     this.listService.sharedIsChecked.subscribe(isChecked => this.isChecked = isChecked);
     listService.sharedDayTestSubject.subscribe( schedule => this.schedule = schedule);
 
-    this.schedule.day.forEach( list => this.tourism.push(
+    this.schedule[0].day.forEach( list => this.tourism.push(
       list.tourism
       ));
   }

@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuardService } from './auth-guard.service';
 import { HomeComponent } from './home/home.component';
 import { ContainerComponent } from './container/container.component';
+import { TripsComponent } from './trips/trips.component';
+import { AuthGuard } from './_helpers';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
+const listModule = () => import('./container/list/list.module').then(m => m.ListModule);
 
 const routes: Routes = [
   {
@@ -17,12 +19,19 @@ const routes: Routes = [
   },
   {
     path: 'schedule',
-    component: ContainerComponent
+    component: ContainerComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'search',
-    loadChildren: () => import('./container/list/list.module').then(m => m.ListModule),
-    data: { preload: true}
+    loadChildren: listModule,
+    //data: { preload: true},
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'trips',
+    component: TripsComponent,
+    canActivate: [AuthGuard],
   },
   {
     path:'**',

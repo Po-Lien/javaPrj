@@ -44,11 +44,11 @@ import { Name } from '../../data/Name';
     }
 
     getListTest() {
-      const daytest = {
+      const daytest = [{
           owner:'',
           member:[''],
           titleId:5,
-          title:'',
+          title:'Test',
           day:[{
             date: '2020-10-10',
             day: '第一天',
@@ -135,7 +135,99 @@ import { Name } from '../../data/Name';
               address: ''
             }]
           }]
-        }
+        },
+        {
+          owner:'',
+          member:[''],
+          titleId:5,
+          title:'Test',
+          day:[{
+            date: '2020-10-10',
+            day: '第一天',
+            week: '星期六',
+            tourism: [{
+                startTime: '8:00',
+                endTime: '9:00',
+                forcastTime: '1小時',
+                place: '台北轉運站',
+                address: '103台北市大同區市民大道一段209號'
+              },
+              {
+                startTime: '8:00',
+                endTime: '9:00',
+                forcastTime: '1小時',
+                place: '台北轉運站',
+                address: '103台北市大同區市民大道一段209號'
+              },
+              {
+                startTime: '8:00',
+                endTime: '9:00',
+                forcastTime: '1小時',
+                place: '台北轉運站',
+                address: '103台北市大同區市民大道一段209號'
+              }]
+          },
+          {
+            date: '2020-10-11',
+            day: '第二天',
+            week: '星期日',
+            tourism: [{
+                startTime: '8:00',
+                endTime: '9:00',
+                forcastTime: '1小時',
+                place: '台北轉運站',
+                address: '103台北市大同區市民大道一段209號'
+              }]
+          },
+          {
+            date: '2020-10-12',
+            day: '第三天',
+            week: '星期一',
+            tourism: [{
+              startTime: '8:00',
+              endTime: '',
+              forcastTime: '',
+              place: '',
+              address: ''
+            }]
+          },
+          {
+            date: '2020-10-13',
+            day: '第四天',
+            week: '星期二',
+            tourism: [{
+              startTime: '8:00',
+              endTime: '',
+              forcastTime: '',
+              place: '',
+              address: ''
+            }]
+          },
+          {
+            date: '2020-10-14',
+            day: '第五天',
+            week: '星期三',
+            tourism: [{
+              startTime: '8:00',
+              endTime: '',
+              forcastTime: '',
+              place: '',
+              address: ''
+            }]
+          },
+          {
+            date: '2020-10-15',
+            day: '第六天',
+            week: '星期四',
+            tourism: [{
+              startTime: '8:00',
+              endTime: '',
+              forcastTime: '',
+              place: '',
+              address: ''
+            }]
+          }]
+        }]
 
       return daytest;
     }

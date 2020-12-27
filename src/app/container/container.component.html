@@ -3,11 +3,10 @@
         Left navigation!!
     </mat-sidenav>
     <mat-sidenav-content>
-        <div class="map-frame" *ngIf="isAuthenticated">
+        <div class="map-frame">
             <div id="map"></div>
         </div>
-        <app-login *ngIf="!isAuthenticated"></app-login>
-        <app-message-area *ngIf="isAuthenticated"></app-message-area>
-        <router-outlet *ngIf="isAuthenticated"></router-outlet>
+        <app-message-area></app-message-area>
+        <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>

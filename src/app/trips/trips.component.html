@@ -1,0 +1,31 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sideNav mode="side" [(opened)] = "opened" [mode]="(isHandset$ | async) ? 'over' : 'side'">
+        Left navigation!!
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="tab">
+            <span><h1 style="font-size: 45px;">行程</h1></span>
+            <mat-tab-group class="">
+                <mat-tab label="我的行程">
+                    <div class="add-trip">
+                        <button mat-raised-button color="primary" style="float: right;"><mat-icon>add</mat-icon><span class="aligned-with-icon">新增行程</span></button>
+                    </div>
+                    <div fxLayout="row wrap" fxLayoutAlign="space-around stretch">
+                        <mat-card *ngFor="let trips of (trips | keyvalue) ;let i = index" [routerLink] = "'/schedule'" style="cursor: pointer">
+                            <mat-card-header>
+                                <mat-card-title>
+                                    {{ trips.value.title }}
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                {{ trips.value.fromDate }} - {{ trips.value.endDate }}
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </mat-tab>
+                <mat-tab label="旅遊群組">
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
