@@ -18,8 +18,9 @@
             style="display: flex" 
             [(ngModel)]="isChecked" 
             (click)="emit(); sendIsChecked()"
-            routerLink="/schedule/edit"
-            skipLocationChange>
+            routerLink="/schedule/edit/{{titleId}}"
+            skipLocationChange
+            >
             
         </mat-slide-toggle>
 

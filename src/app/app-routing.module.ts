@@ -7,11 +7,18 @@ import { AuthGuard } from './_helpers';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const listModule = () => import('./container/list/list.module').then(m => m.ListModule);
+const usersModule = () => import('./users/users.module').then(x => x.UsersModule);
+//const messageModule = () => import('./container/message-area/message-area.module').then(x => x.MessageAreaModule);
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'users',
+    loadChildren: usersModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'account',

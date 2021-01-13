@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AccountService } from '../_services';
 
 @Component({
   selector: 'app-account',
@@ -7,7 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private accountService: AccountService) { 
+      
+      // redirect to home if already logged in
+      if (this.accountService.userValue) {
+          this.router.navigate(['/trips']);
+      }
+    }
 
   ngOnInit(): void {
   }

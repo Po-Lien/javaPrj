@@ -1,0 +1,25 @@
+<div class="join-container">
+    <header class="join-header">
+        <h1><i class="fas fa-smile"></i>聊天室</h1>
+    </header>
+    <main class="join-main">
+        <form [formGroup]="authentication" (ngSubmit)="onSubmit(authentication)">
+            <div class="form-control">
+                <label for="username">用戶名稱</label>
+                <input formControlName="username" type="text" name="username" id="username" placeholder="輸入ID" required/>
+            </div>
+            <div class="form-control">
+                <label for="room">群組</label>
+                <select name="room" id="room" formControlName="room">
+                    <option value="JavaScript">1</option>
+                    <option value="Python">2</option>
+                    <option value="PHP">3</option>
+                    <option value="C#">4</option>
+                    <option value="Ruby">5</option>
+                    <option value="Java">6</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">進入</button>
+        </form>
+    </main>
+</div>

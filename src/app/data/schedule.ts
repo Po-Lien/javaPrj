@@ -8,5 +8,6 @@ export interface day{
         forcastTime: string;
         place: string;
         address: string;
+        tripseq: string;
     }]
 }

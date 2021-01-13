@@ -1,0 +1,25 @@
+<h2>建立行程</h2>
+<mat-dialog-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+        <mat-form-field>
+            <input matInput placeholder="新的行程" formControlName="tripName" required>
+            <mat-error>
+                請輸入行程名稱
+            </mat-error>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+            <div fxLayout="column" fxLayoutAlign="space-evenly start" style="margin-right: 10px">
+                <label for="formDate">出發日期</label>
+                <input type="date" value="currentDate" [(ngModel)]=currentDate formControlName="currentDate">
+            </div>
+            <div fxLayout="column" fxLayoutAlign="space-evenly start" style="margin-left: 10px">
+                <label for="days">天數</label>
+                <input type="number" value="days" [(ngModel)]=days formControlName="days">
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close style="outline: none;" color="primary">返回</button>
+    <button mat-raised-button [mat-dialog-close]="true" style="outline: none;" color="primary">完成</button>
+</mat-dialog-actions>

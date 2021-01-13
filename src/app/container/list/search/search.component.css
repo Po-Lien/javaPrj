@@ -129,4 +129,9 @@ mat-icon {
     font-size: 16px;
     border: none;
     cursor: pointer;
+    outline:none;
+}
+
+:host ::ng-deep.mat-icon-button{
+    outline:none;
 }

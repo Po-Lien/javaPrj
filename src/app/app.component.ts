@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { Observable, Subscription } from 'rxjs';
+import { AccountService } from './_services';
+import { User } from './_models';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +16,13 @@ export class AppComponent {
   deviceXs: boolean;
   deviceLg: boolean;
   deviceXl: boolean;
+  user: User;
 
   constructor(
     private mediaObserver: MediaObserver,
+    private accountService: AccountService
      ){ 
+      this.accountService.user.subscribe(x => this.user = x);
   }
 
   toggle(){
@@ -28,7 +33,7 @@ export class AppComponent {
   ngOnInit(): void {
     this.mediaSub = this.mediaObserver.media$.subscribe(
       (result: MediaChange) => {
-        console.log(result.mqAlias);
+        //console.log(result.mqAlias);
 
         this.deviceLg = result.mqAlias === 'lg' ? true : false;
         this.deviceXl = result.mqAlias === 'xl' ? true : false;

@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { User, Token } from '../_models';
+import { User } from '../_models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
-
-    private tokenSubject: BehaviorSubject<Token>;
-    public token: Observable<Token>;
 
     constructor(
         private router: Router,
@@ -21,9 +18,6 @@ export class AccountService {
     ) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
-
-        this.tokenSubject = new BehaviorSubject<Token>(JSON.parse(localStorage.getItem('token')));
-        this.token = this.tokenSubject.asObservable();
     }
 
     public get userValue(): User {
@@ -31,7 +25,7 @@ export class AccountService {
     }
 
     login(username, password) {
-        return this.http.post<User>(`http://localhost:8080/AngularConnect/doLogin/authenticate.do`, { username, password })
+        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
@@ -47,21 +41,8 @@ export class AccountService {
         this.router.navigate(['/account/login']);
     }
 
-    // registerEmail(user: User) {
-    //     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    //     let options = { headers: headers, withCredentials: false };
-
-    //     return this.http.post(`http://localhost:8080/AngularConnect/doLogin/sendEmail.do`, user, options);
-    // }
-
-    registerEmail(httpParams:HttpParams):Observable<User[]>{
-        return this.http.post<User[]>(`http://localhost:8080/AngularConnect/doLogin/sendEmail.do`,{params:httpParams});
-      }
-
-    registerToken(token: Token) {
-        return this.http.post(`http://localhost:8080/AngularConnect/doLogin/sendToken.do`, token, {
-            withCredentials: false
-       });
+    register(user: User) {
+        return this.http.post(`${environment.apiUrl}/users/register`, user);
     }
 
     getAll() {
@@ -72,30 +53,30 @@ export class AccountService {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
     }
 
-    // update(id, params) {
-    //     return this.http.put(`${environment.apiUrl}/users/${id}`, params)
-    //         .pipe(map(x => {
-    //             // update stored user if the logged in user updated their own record
-    //             if (id == this.userValue.id) {
-    //                 // update local storage
-    //                 const user = { ...this.userValue, ...params };
-    //                 localStorage.setItem('user', JSON.stringify(user));
+    update(id, params) {
+        return this.http.put(`${environment.apiUrl}/users/${id}`, params)
+            .pipe(map(x => {
+                // update stored user if the logged in user updated their own record
+                if (id == this.userValue.id) {
+                    // update local storage
+                    const user = { ...this.userValue, ...params };
+                    localStorage.setItem('user', JSON.stringify(user));
 
-    //                 // publish updated user to subscribers
-    //                 this.userSubject.next(user);
-    //             }
-    //             return x;
-    //         }));
-    // }
+                    // publish updated user to subscribers
+                    this.userSubject.next(user);
+                }
+                return x;
+            }));
+    }
 
-    // delete(id: string) {
-    //     return this.http.delete(`${environment.apiUrl}/users/${id}`)
-    //         .pipe(map(x => {
-    //             // auto logout if the logged in user deleted their own record
-    //             if (id == this.userValue.id) {
-    //                 this.logout();
-    //             }
-    //             return x;
-    //         }));
-    // }
+    delete(id: string) {
+        return this.http.delete(`${environment.apiUrl}/users/${id}`)
+            .pipe(map(x => {
+                // auto logout if the logged in user deleted their own record
+                if (id == this.userValue.id) {
+                    this.logout();
+                }
+                return x;
+            }));
+    }
 }

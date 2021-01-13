@@ -53,7 +53,8 @@ const materialMoudle = [
   MatSelectModule,
   MatInputModule,
   MatStepperModule,
-  MatGridListModule
+  MatGridListModule,
+  MatDialogModule
 ]
 
 @NgModule({

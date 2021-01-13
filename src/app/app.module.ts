@@ -15,12 +15,13 @@ import { ListRoutingModule } from './container/list/list-routing.module';
 
 import { ShareMaterialModule } from './share-material/share-material.module';
 import { HomeComponent } from './home/home.component';
-import { TripsComponent } from './trips/trips.component';
+import { TripsComponent, DialogSetScheduleDialog } from './trips/trips.component';
 import { AlertComponent } from './account/alert/alert.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
     MessageAreaComponent,
     HomeComponent,
     TripsComponent,
-    AlertComponent
+    DialogSetScheduleDialog,
+    AlertComponent,
   ],
   imports: [
     FlexLayoutModule,

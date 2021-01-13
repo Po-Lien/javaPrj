@@ -26,6 +26,10 @@
     width: 48px;
 }
 
+:host ::ng-deep.mat-icon-button{
+    outline:none;
+}
+
 .trip-list-header-title {
     margin: 0;
     font-size: 20px;

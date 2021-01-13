@@ -47,8 +47,8 @@ import { Name } from '../../data/Name';
       const daytest = [{
           owner:'',
           member:[''],
-          titleId:5,
-          title:'Test',
+          titleId:"5",
+          title:'Test(ID=5)',
           day:[{
             date: '2020-10-10',
             day: '第一天',
@@ -139,8 +139,8 @@ import { Name } from '../../data/Name';
         {
           owner:'',
           member:[''],
-          titleId:5,
-          title:'Test',
+          titleId:"6",
+          title:'Test(ID=6)',
           day:[{
             date: '2020-10-10',
             day: '第一天',

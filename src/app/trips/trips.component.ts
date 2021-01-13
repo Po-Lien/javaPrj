@@ -6,7 +6,10 @@ import { HeaderService } from '../header/header.service';
 import { ListService } from '../container/list/list.service';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { AccountService } from '../_services';
-import { first } from 'rxjs/operators';
+import { User } from '../_models';
+import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trips',
@@ -19,21 +22,23 @@ export class TripsComponent implements OnInit {
   trips = [];
   mediaSub: Subscription;
   deviceXs: boolean;
-  users = null;
+  user: User;
+  titleId = [];
 
   constructor(
     private headerService: HeaderService,
     private breakpointObserver: BreakpointObserver,
     private listService: ListService,
     private mediaObserver: MediaObserver,
-    private accountService: AccountService
+    private accountService: AccountService,
+    public dialog: MatDialog,
+    private router: Router
     ) {
     this.headerService.sharedSideNavSubject.subscribe( opened => this.opened = opened);
     this.listService.sharedDayTestSubject.subscribe( trip => this.data = trip);
+    this.user = this.accountService.userValue;
 
-    console.log(this.data);
     const index = this.data[0].day.length - 1;
-    console.log(index);
 
     this.data.map( list => this.trips.push({
       owner: list.owner,
@@ -44,20 +49,24 @@ export class TripsComponent implements OnInit {
       endDate: list.day[index].date
     }));
 
-    console.log(this.trips[0].title)
+    this.trips.forEach(list => this.titleId.push( list.titleId))
 
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogSetScheduleDialog);
+
+    dialogRef.afterClosed().subscribe( result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   ngOnInit(): void {
     this.mediaSub = this.mediaObserver.media$.subscribe(
       (result: MediaChange) => {
-        console.log(result.mqAlias);
+        //console.log(result.mqAlias);
       }
     );
-
-    this.accountService.getAll()
-            .pipe(first())
-            .subscribe(users => this.users = users);
   }
 
   ngOnDestroy(){
@@ -69,4 +78,35 @@ export class TripsComponent implements OnInit {
     shareReplay()
   );
 
+}
+
+@Component({
+  selector: 'dialog-set-schedule-dialog',
+  templateUrl: 'dialog-set-schedule-dialog.html',
+  styleUrls: ['dialog-set-schedule-dialog.css']
+})
+
+export class DialogSetScheduleDialog implements OnInit{
+  tripName: string;
+  currentDate: string;
+  days: number;
+  form: FormGroup;
+
+  constructor(
+    private fb: FormBuilder  
+    ){
+      this.currentDate = new Date().toISOString().split('T')[0];
+      console.log(this.currentDate);
+      this.days = 3;
+    };
+
+  ngOnInit() {
+    this.form = this.fb.group({
+      tripName: ['', Validators.required],
+      currentDate: ['', Validators.required],
+      days: ['', Validators.required]
+    })
+  };
+
+  onSubmit(){};
 }

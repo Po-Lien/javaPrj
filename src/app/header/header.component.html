@@ -1,38 +1,47 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row fxLayoutAlign="space-between center" >
+<mat-toolbar color="primary" fxLayoutAlign="space-between center">
         <div>
-            <button mat-icon-button (click)="emit(); sendSideNav()" *ngIf="!deviceXs">
-                <mat-icon>{{ visible ? 'close' : 'menu' }}</mat-icon>
-            </button>
-            <button mat-button routerLink="" style="font-size: 30px;" *ngIf="(deviceLg || deviceXl)">Journey</button>
+            <a class="nav-item nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="font-size: 30px;" *ngIf="(deviceLg || deviceXl)">Journey</a>
         </div>
         <div>
-            <button mat-button routerLink="" style="font-size: 30px;" *ngIf="!(deviceLg || deviceXl)">Journey</button>
+            <a class="nav-item nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="font-size: 30px;" *ngIf="!(deviceLg || deviceXl)">Journey</a>
         </div>
-        <div>
-                <button mat-icon-button *ngIf="!user" routerLink="/account/login">
+        <div fxLayout="row">
+                <a class="nav-item nav-link" *ngIf="!user" routerLink="/account/login">
                     <mat-icon>login</mat-icon>
-                </button>
-                <button mat-icon-button *ngIf="user" (click)="logout()">
+                </a>
+                <a class="nav-item nav-link" style="font-family: 'Noto Sans TC',sans-serif;" *ngIf="user && !deviceXs" routerLink="/trips">
+                    <span>行程</span>
+                </a>
+                <a class="nav-item nav-link" *ngIf="user && !deviceXs" routerLink="/users" routerLinkActive="active">
+                    Users
+                </a>
+                <a class="nav-item nav-link" *ngIf="user && !deviceXs" (click)="logout()">
                     <mat-icon>exit_to_app</mat-icon>
-                </button>
-                <button mat-button *ngIf="deviceXs" [mat-menu-trigger-for]="menu">
+                </a>
+                <a class="nav-item nav-link" *ngIf="deviceXs" [mat-menu-trigger-for]="menu">
                     <mat-icon>more_vert</mat-icon>
-                </button>
+                </a>
         </div>
-    </mat-toolbar-row>
 </mat-toolbar>
 <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="">
-        <mat-icon>home</mat-icon>
-        Home
-    </button>
-    <button mat-menu-item *ngIf="!user" routerLink="/account/login">
+    <a class="nav-item nav-link-menu" mat-menu-item routerLink="" fxLayoutAlign="space-around center" >
+        <mat-icon >home</mat-icon>
+        <span>Home</span>
+    </a>
+    <a class="nav-item nav-link-menu" mat-menu-item *ngIf="user" routerLink="/trips" fxLayoutAlign="space-around center" >
+        <mat-icon>event_note</mat-icon>
+        <span>行程</span>
+    </a>
+    <a class="nav-item nav-link-menu" mat-menu-item *ngIf="user" routerLink="/users" fxLayoutAlign="space-around center" >
+        <mat-icon>group</mat-icon>
+        <span>Users</span>
+    </a>
+    <a class="nav-item nav-link-menu" mat-menu-item *ngIf="!user" routerLink="/account/login" fxLayoutAlign="space-around center" >
         <mat-icon>login</mat-icon>
-        Login
-    </button>
-    <button mat-menu-item *ngIf="user" (click)="logout()">
+        <span>Login</span>
+    </a>
+    <a class="nav-item nav-link-menu" mat-menu-item *ngIf="user" (click)="logout()" fxLayoutAlign="space-around center" >
         <mat-icon>exit_to_app</mat-icon>
-        Logout
-    </button>
+        <span>Logout</span>
+    </a>
 </mat-menu>

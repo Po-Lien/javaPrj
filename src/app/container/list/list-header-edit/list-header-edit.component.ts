@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { day } from '../../../data/schedule';
 import { schedule } from '../../../data/test';
 import '../../../methods/array.extention';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class ListHeaderEditComponent implements OnInit {
   isChecked: boolean;
   subscription: Subscription;
   Title: string;
+  titleId: string;
   day = [];
   dayTest: any;
   date = [];
@@ -24,25 +26,31 @@ export class ListHeaderEditComponent implements OnInit {
   selected: number;
   @Output() toggle: EventEmitter<any> = new EventEmitter();
   
-  constructor( private listService: ListService) {
-    this.listService.sharedIsChecked.subscribe(isChecked => this.isChecked = isChecked);
-    this.listService.sharedTitleSubject.subscribe(title => this.Title = title);
-    this.listService.sharedDayTestSubject.subscribe(dayTest => this.dayTest = dayTest)
-        
-    this.dayTest[0].day.map(list => this.day.push(
-        {
-          date: list.date,
-          day: list.day,
-          week: list.week
-        }
-    ));
-     
-    this.selected = this.day.length;
-     
-    this.day.forEach(list => this.date.push(list.date));
-     
-    this.fromDate = this.date[0];
-    this.endDate = this.date[this.selected - 1];
+  constructor( 
+    private listService: ListService,
+    private route: ActivatedRoute
+    ) {
+      this.titleId = this.route.snapshot.params["titleId"];
+
+      this.listService.sharedIsChecked.subscribe(isChecked => this.isChecked = isChecked);
+      this.listService.sharedDayTestSubject.subscribe(dayTest => this.dayTest = dayTest.filter(list => list.titleId === this.titleId))
+      
+      this.Title = this.dayTest[0].title;
+
+      this.dayTest[0].day.map(list => this.day.push(
+          {
+            date: list.date,
+            day: list.day,
+            week: list.week
+          }
+      ));
+      
+      this.selected = this.day.length;
+      
+      this.day.forEach(list => this.date.push(list.date));
+      
+      this.fromDate = this.date[0];
+      this.endDate = this.date[this.selected - 1];
 
     }
   

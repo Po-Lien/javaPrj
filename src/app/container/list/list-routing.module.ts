@@ -18,7 +18,7 @@ const listRoutes: Routes = [
     component: ListComponent,
     children: [
       {        
-        path: '',
+        path: ':titleId',
         component: ListHeaderComponent,
         children: [
           {
@@ -28,7 +28,7 @@ const listRoutes: Routes = [
         ]
       },
       {
-        path: 'edit',
+        path: 'edit/:titleId',
         component: ListHeaderEditComponent,
         children: [
           {

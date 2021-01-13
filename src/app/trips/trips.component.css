@@ -21,6 +21,6 @@
 
 :host::ng-deep.mat-card{
     height: 100px !important;
-    width: 168px !important;
+    width: 200px !important;
     margin: 10px;
 }

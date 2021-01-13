@@ -2,7 +2,7 @@
     <mat-card style="background-color:#f4f4f4; display:contents" *ngFor="let day of dayContent; let i = index;">
         <div>
             <header class="trip-list-day-header" style="padding: 1px; left: 7px;">
-                <h3 class="" style="background: rgb(238, 60, 119); cursor: pointer;">{{day.day}}<span> : </span>{{day.week}}</h3>
+                <h3 class="" style="background: rgb(238, 60, 119); cursor: pointer; margin-top: revert;">{{day.day}}<span> : </span>{{day.week}}</h3>
                 <div class="trip-list-day-header-time" style="margin-top: 21px;">出發時間 : <b class="">{{tourism[i][0].startTime}}</b>
                 </div>
             </header>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="add-venue" style="margin-top: 17px;">
                     <div>
-                        <a routerLink="/search" skipLocationChange>+ 新增景點</a>
+                        <a routerLink="/schedule/search" skipLocationChange>+ 新增景點</a>
                     </div>
                 </div>
             </div>

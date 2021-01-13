@@ -14,12 +14,11 @@ import { AccountService, AlertService } from '../../_services';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  opened: boolean;
-  
   form: FormGroup;
-  private returnUrl: string;
   loading = false;
   submitted = false;
+  returnUrl: string;
+  opened:boolean;
 
   constructor( 
     private route: ActivatedRoute,
@@ -30,44 +29,44 @@ export class LoginComponent implements OnInit {
     private alertService: AlertService,
     private accountService: AccountService) {
         this.headerService.sharedSideNavSubject.subscribe(opened => this.opened = opened);
-        
-        // redirect to home if already logged in
-        if (this.accountService.userValue) {
-          this.router.navigate(['/trips']);
-        }
      }
 
   ngOnInit() {
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/trips';
-    
-    this.form = this.fb.group({
-      username: ['', Validators.email],
-      password: ['', Validators.required]
-    });
+      this.form = this.fb.group({
+          username: ['', Validators.required],
+          password: ['', Validators.required]
+      });
+
+      // get return url from route parameters or default to '/'
+      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/trips';
   }
 
+  // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
 
   onSubmit() {
-    this.submitted = true;
+      this.submitted = true;
 
-        // reset alerts on submit
-        this.alertService.clear();
+      // reset alerts on submit
+      this.alertService.clear();
 
-        this.loading = true;
-        this.accountService.login(this.f.username.value, this.f.password.value)
-            .pipe(first())
-            .subscribe(
-                data => {
-                    this.router.navigate([this.returnUrl]);
-                },
-                error => {
-                    this.alertService.error(error);
-                    this.loading = false;
-                });
-  }
-  
+      // stop here if form is invalid
+      if (this.form.invalid) {
+          return;
+      }
+
+      this.loading = true;
+      this.accountService.login(this.f.username.value, this.f.password.value)
+          .pipe(first())
+          .subscribe(
+              data => {
+                  this.router.navigate([this.returnUrl]);
+              },
+              error => {
+                  this.alertService.error(error);
+                  this.loading = false;
+              });
+  };
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
   .pipe(

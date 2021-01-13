@@ -18,7 +18,7 @@
             style="display: flex" 
             [(ngModel)]="isChecked" 
             (click)="emit(); sendIsChecked();"
-            routerLink="/schedule"
+            routerLink="/schedule/{{titleId}}"
             skipLocationChange>
             
         </mat-slide-toggle>
@@ -28,7 +28,7 @@
         </p>
         <div class="trip-list-member">
             <button mat-icon-button style="text-align:left">
-                <mat-icon style="font-size: 39px;">face</mat-icon>
+                <mat-icon style="font-size: 39px; outline:none;">face</mat-icon>
             </button>
         </div>
     </div>
@@ -53,8 +53,8 @@
         </mat-tab>
         <mat-tab>
             <ng-template mat-tab-label>
-                <button mat-mini-fab color="primary" style="top: 16px" (click)="addTab(selected)">
-                    <mat-icon>add</mat-icon>
+                <button mat-mini-fab color="primary" style="top: 16px; outline:none;" (click)="addTab(selected)">
+                    <mat-icon >add</mat-icon>
                 </button>
             </ng-template>
         </mat-tab>
