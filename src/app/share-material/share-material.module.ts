@@ -54,7 +54,9 @@ const materialMoudle = [
   MatInputModule,
   MatStepperModule,
   MatGridListModule,
-  MatDialogModule
+  MatDialogModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 ]
 
 @NgModule({

@@ -17,7 +17,7 @@
             color="primary" 
             style="display: flex" 
             [(ngModel)]="isChecked" 
-            (click)="emit(); sendIsChecked();"
+            (click)="sendIsChecked();"
             routerLink="/schedule/{{titleId}}"
             skipLocationChange>
             
@@ -37,15 +37,14 @@
 <mat-tab-group 
     class="trip-list-header-day-container-edit-mode" 
     *ngIf="isChecked" 
-    [selectedIndex]="selected" 
-    (selectIndexChange)="selected">
-        <mat-tab *ngFor="let day of day; let i = index">
+    [(selectedIndex)]="selected">
+        <mat-tab *ngFor="let schedule of day; let i = index">
             <ng-template mat-tab-label>
-                {{ day.date }}
+                {{ schedule.date }}
                 <br>
-                {{ day.day }}
+                {{ schedule.day }}
                 <div class="delete">
-                    <button mat-icon-button [disabled]="selected === 1" (click)="removeTab(i)">
+                    <button mat-icon-button [disabled]="day.length === 1" (click)="removeTab(i)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </div>
@@ -59,4 +58,4 @@
             </ng-template>
         </mat-tab>
 </mat-tab-group>
-<app-list-content-edit [dayContent] = "day"></app-list-content-edit>
+<app-list-content-edit [dayContent] = "day" [titleId]="titleId" [selected]="selected" (selectChange)="selected=$event"></app-list-content-edit>

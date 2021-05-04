@@ -17,6 +17,16 @@ const listRoutes: Routes = [
     path: '',
     component: ListComponent,
     children: [
+      {
+        path: 'search/:titleId',
+        component:SearchComponent,
+        children: [
+          {
+            path:'',
+            component: SearchContentComponent,
+          }
+        ]
+      },
       {        
         path: ':titleId',
         component: ListHeaderComponent,
@@ -37,16 +47,6 @@ const listRoutes: Routes = [
           }
         ]
       },
-      {
-        path: 'search',
-        component:SearchComponent,
-        children: [
-          {
-            path:'',
-            component: SearchContentComponent,
-          }
-        ]
-      }
     ]}
     ]}
 ];

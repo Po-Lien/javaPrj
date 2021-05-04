@@ -21,6 +21,7 @@ import { AlertComponent } from './account/alert/alert.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
     TripsComponent,
     DialogSetScheduleDialog,
     AlertComponent,
+    ConfirmDialogComponent,
   ],
+  entryComponents: [ConfirmDialogComponent],
   imports: [
     FlexLayoutModule,
     ReactiveFormsModule,

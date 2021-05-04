@@ -5,6 +5,9 @@ import { ContainerComponent } from './container/container.component';
 import { TripsComponent } from './trips/trips.component';
 import { AuthGuard } from './_helpers';
 
+import { SearchContentComponent } from './container/list/search-content/search-content.component';
+import { SearchComponent } from './container/list/search/search.component';
+
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const listModule = () => import('./container/list/list.module').then(m => m.ListModule);
 const usersModule = () => import('./users/users.module').then(x => x.UsersModule);
@@ -29,12 +32,23 @@ const routes: Routes = [
     component: ContainerComponent,
     canActivate: [AuthGuard],
   },
-  {
-    path: 'search',
-    loadChildren: listModule,
-    //data: { preload: true},
-    canActivate: [AuthGuard],
-  },
+  // {
+  //   path: 'search',
+  //   loadChildren: listModule,
+  //   //data: { preload: true},
+  //   canActivate: [AuthGuard],
+  // },
+  ////
+  // {
+  //   path: 'search',
+  //   component:SearchComponent,
+  //   children: [
+  //     {
+  //       path:'',
+  //       component: SearchContentComponent,
+  //     }
+  //   ]
+  // },
   {
     path: 'trips',
     component: TripsComponent,

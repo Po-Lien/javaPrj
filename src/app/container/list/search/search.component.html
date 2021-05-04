@@ -1,9 +1,9 @@
-<a routerLink="/schedule" skipLocationChange color="primary" *ngIf="!isChecked">
+<a routerLink="/schedule/{{titleId}}" skipLocationChange color="primary" *ngIf="!isChecked">
     <button mat-button style="position: absolute; min-width: 39px; outline:none;" class="create-venu-tab-back">
         <mat-icon style="margin-left:4px;">arrow_back</mat-icon>
     </button>
 </a>
-<a routerLink="/schedule/edit" skipLocationChange color="primary" *ngIf="isChecked" >
+<a routerLink="/schedule/edit/{{titleId}}" skipLocationChange color="primary" *ngIf="isChecked" >
     <button mat-button style="position: absolute; min-width: 39px; outline:none;" class="create-venu-tab-back">
         <mat-icon style="margin-left:4px;">arrow_back</mat-icon>
     </button>
@@ -69,4 +69,5 @@
         3
     </mat-tab>
 </mat-tab-group>
-<router-outlet></router-outlet>
+<!--<router-outlet></router-outlet>-->
+<app-search-content></app-search-content>

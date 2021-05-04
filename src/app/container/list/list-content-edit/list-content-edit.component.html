@@ -2,14 +2,14 @@
     <mat-card style="background-color:#f4f4f4; display:contents" *ngFor="let day of dayContent; let i = index">
         <div>
             <header class="trip-list-day-header" style="padding: 1px; left: 7px;">
-                <h3 class="" style="background: rgb(238, 60, 119); cursor: pointer; margin-top: revert;">{{day.day}}<span> : </span>{{day.week}}</h3>
-                <div class="trip-list-day-header-time" style="margin-top: 21px;">出發時間 : <b>{{tourism[i][0].startTime}}</b>
+                <h3 (click)="selectedBind(i)" style="background: rgb(238, 60, 119); cursor: pointer; margin-top: revert;">{{day.day}}<span> : </span>{{day.week}}</h3>
+                <div class="trip-list-day-header-time" style="margin-top: 21px;">出發時間 : <b>{{day.tourism[0].startTime}}</b>
                 </div>
             </header>
         </div>
         <div>
             <div>
-                <div *ngIf="tourism[i][0].place != ''">
+                <div *ngIf="day.tourism[0].place != ''">
                     <mat-card class="trip-list-venu-container" *ngFor="let tourism of (tourism[i] | keyvalue)">
                         <div class="trip-list-day-venu-time"><span
                                 class="trip-list-day-venu-time-from">{{tourism.value.startTime}}</span><span
@@ -26,7 +26,7 @@
                 </div>
                 <div class="add-venue" style="margin-top: 17px;">
                     <div>
-                        <a routerLink="/schedule/search" skipLocationChange>+ 新增景點</a>
+                        <a routerLink="/schedule/search/{{titleId}}" skipLocationChange>+ 新增景點</a>
                     </div>
                 </div>
             </div>

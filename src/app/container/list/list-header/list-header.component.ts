@@ -33,7 +33,7 @@ export class ListHeaderComponent implements OnInit {
       
         this.titleId = this.route.snapshot.params['titleId'];
         this.listService.sharedIsChecked.subscribe(isChecked => this.isChecked = isChecked);
-        this.listService.sharedDayTestSubject.subscribe(dayTest => this.dayTest = dayTest.filter( list => list.titleId === this.titleId));
+        this.listService.sharedDayTestSubject.subscribe(dayTest => this.dayTest = dayTest)//.filter( list => list.titleId === this.titleId));
 
 
         this.Title = this.dayTest[0].title;
@@ -63,7 +63,7 @@ export class ListHeaderComponent implements OnInit {
   }
  
   ngOnChanges(): void {
-    this.day = this.listService.getList();
+    //this.day = this.listService.getList();
   }
 
   emit(){

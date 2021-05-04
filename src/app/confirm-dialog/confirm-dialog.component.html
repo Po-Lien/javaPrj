@@ -1,0 +1,10 @@
+<mat-dialog-content fxLayoutGap>
+    <p mat-dialog-title>{{data.title}}</p>
+
+    <p display-2>{{data.message}}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onDismiss()">取消</button>
+    <button mat-raised-button color="primary" (click)="onConfirm()">確認</button>
+</mat-dialog-actions>

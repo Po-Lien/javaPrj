@@ -27,3 +27,13 @@ a { cursor: pointer; }
     text-align: center;
     box-sizing: content-box;
 }
+
+button:focus {
+    border: none;
+    outline: none;
+}
+
+mat-card:focus {
+    border: none;
+    outline: none;
+}

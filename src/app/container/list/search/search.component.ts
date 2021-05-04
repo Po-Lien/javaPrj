@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ListService } from '../list.service';
 
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -22,8 +24,11 @@ export class SearchComponent implements OnInit {
   place: string[] = ['臺北市','新北市','宜蘭市','基隆市'];
   isChecked: boolean;
 
-  constructor(private listService: ListService) { 
+  titleId: string;
+
+  constructor(private listService: ListService, private route: ActivatedRoute ) { 
     listService.sharedIsChecked.subscribe(isChecked => this.isChecked = isChecked);
+    this.titleId = this.route.snapshot.params['titleId']
   }
 
   ngOnInit(){

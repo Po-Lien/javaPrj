@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, PLATFORM_ID, Inject } from '@angular/core';
 import { ListService } from '../list.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-list-content',
@@ -9,6 +10,10 @@ import { ListService } from '../list.service';
 
 export class ListContentComponent implements OnInit {
   @Input() dayContent: [];
+  @Input() selected;
+  @Output() selectChange = new EventEmitter<number>();
+  @Input() titleId;
+
   isChecked: boolean;
   schedule: any;
   tourism = [];
@@ -16,13 +21,14 @@ export class ListContentComponent implements OnInit {
   tourismList = [];
   tourismCheck;
 
-  constructor( private listService: ListService) { 
-    this.listService.sharedIsChecked.subscribe(isChecked => this.isChecked = isChecked);
-    listService.sharedDayTestSubject.subscribe( schedule => this.schedule = schedule);
+  constructor( private listService: ListService,
+    @Inject(PLATFORM_ID) private platformid: object ) { 
+      this.listService.sharedIsChecked.subscribe(isChecked => this.isChecked = isChecked);
+      listService.sharedDayTestSubject.subscribe( schedule => this.schedule = schedule);
 
-    this.schedule[0].day.forEach( list => this.tourism.push(
-      list.tourism
-      ));
+      this.schedule[0].day.forEach( list => this.tourism.push(
+        list.tourism
+        ));
   }
 
   // doTourismAdd(): void {
@@ -33,5 +39,21 @@ export class ListContentComponent implements OnInit {
   
   ngOnInit() {
   }
+
+  selectedBind( i: number){
+      this.selected = i;
+      this.selectChange.emit(this.selected);
+    }
+    
+    //set focus on element test
+  // log = (event) => {
+  //   console.log(event.target.name);
+  // }
+
+  // setFocus(){
+  //   if(isPlatformBrowser(this.platformid)){
+  //     this.selected.nativeElement.focus();
+  //   }
+  // }
 
 }

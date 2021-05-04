@@ -1,11 +1,10 @@
 import { getLocaleDayNames } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { day } from 'src/app/data/schedule';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { schedule } from '../../data/test';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
-import { HttpClient, HttpResponse, HttpParams, HttpHeaders} from '@angular/common/http';
-import { Name } from '../../data/Name';
+import { HttpClient, HttpResponse, HttpParams, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
+import { Name, days, journeys, dayAdd } from '../../data';
 
 
 
@@ -20,17 +19,19 @@ import { Name } from '../../data/Name';
     public isCheckedSubject = new BehaviorSubject<any>(this.isChecked);
     sharedIsChecked = this.isCheckedSubject.asObservable();
     
-    day: object[] = this.getList();
-    public daySubject = new BehaviorSubject<any>(this.day);
-    sharedDaySubject = this.daySubject.asObservable();
+    // day: object[] = this.getList();
+    // public daySubject = new BehaviorSubject<any>(this.day);
+    // sharedDaySubject = this.daySubject.asObservable();
     
-    title: string ="Title";
-    public titleSubject = new BehaviorSubject<any>(this.title);
-    sharedTitleSubject = this.titleSubject.asObservable();
+    // title: string ="Title";
+    // public titleSubject = new BehaviorSubject<any>(this.title);
+    // sharedTitleSubject = this.titleSubject.asObservable();
     
     dayTest = this.getListTest();
     public dayTestSubject = new BehaviorSubject<any>(this.dayTest);
     sharedDayTestSubject = this.dayTestSubject.asObservable();
+
+    //private daysSubject = new BehaviorSubject<
 
     constructor(private http: HttpClient){
     }
@@ -232,76 +233,76 @@ import { Name } from '../../data/Name';
       return daytest;
     }
 
-    getList(){
-        const day = [
-            {
-              date: '2020-10-10',
-              day: '第一天',
-              week: '星期六',
-              startTime: '8:00',
-              endTime: '9:00',
-              forcastTime: '1小時',
-              place: '台北轉運站',
-              address: '103台北市大同區市民大道一段209號'
-            },
-            {
-              date: '2020-10-11',
-              day: '第二天',
-              week: '星期日',
-              startTime: '8:00',
-              endTime: '',
-              forcastTime: '',
-              place: '',
-              address: ''
-            }
-            ,
-            {
-              date: '2020-10-12',
-              day: '第三天',
-              week: '星期一',
-              startTime: '8:00',
-              endTime: '',
-              forcastTime: '',
-              place: '',
-              address: ''
-            }
-            ,
-            {
-              date: '2020-10-13',
-              day: '第四天',
-              week: '星期二',
-              startTime: '8:00',
-              endTime: '',
-              forcastTime: '',
-              place: '',
-              address: ''
-            }
-            ,
-            {
-              date: '2020-10-14',
-              day: '第五天',
-              week: '星期三',
-              startTime: '8:00',
-              endTime: '',
-              forcastTime: '',
-              place: '',
-              address: ''
-            }
-            ,
-            {
-              date: '2020-10-15',
-              day: '第六天',
-              week: '星期四',
-              startTime: '8:00',
-              endTime: '',
-              forcastTime: '',
-              place: '',
-              address: ''
-            }
-          ]
+    // getList(){
+    //     const day = [
+    //         {
+    //           date: '2020-10-10',
+    //           day: '第一天',
+    //           week: '星期六',
+    //           startTime: '8:00',
+    //           endTime: '9:00',
+    //           forcastTime: '1小時',
+    //           place: '台北轉運站',
+    //           address: '103台北市大同區市民大道一段209號'
+    //         },
+    //         {
+    //           date: '2020-10-11',
+    //           day: '第二天',
+    //           week: '星期日',
+    //           startTime: '8:00',
+    //           endTime: '',
+    //           forcastTime: '',
+    //           place: '',
+    //           address: ''
+    //         }
+    //         ,
+    //         {
+    //           date: '2020-10-12',
+    //           day: '第三天',
+    //           week: '星期一',
+    //           startTime: '8:00',
+    //           endTime: '',
+    //           forcastTime: '',
+    //           place: '',
+    //           address: ''
+    //         }
+    //         ,
+    //         {
+    //           date: '2020-10-13',
+    //           day: '第四天',
+    //           week: '星期二',
+    //           startTime: '8:00',
+    //           endTime: '',
+    //           forcastTime: '',
+    //           place: '',
+    //           address: ''
+    //         }
+    //         ,
+    //         {
+    //           date: '2020-10-14',
+    //           day: '第五天',
+    //           week: '星期三',
+    //           startTime: '8:00',
+    //           endTime: '',
+    //           forcastTime: '',
+    //           place: '',
+    //           address: ''
+    //         }
+    //         ,
+    //         {
+    //           date: '2020-10-15',
+    //           day: '第六天',
+    //           week: '星期四',
+    //           startTime: '8:00',
+    //           endTime: '',
+    //           forcastTime: '',
+    //           place: '',
+    //           address: ''
+    //         }
+    //       ]
 
-          return day;
-    }
+    //       return day;
+    // }
 
     public changeToCN(num: number): string {
       let words = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
@@ -333,13 +334,72 @@ import { Name } from '../../data/Name';
       return weekday[num];
     }
 
-    url=`http://localhost:8080/AngularConnect/json/getcitypoint.do`;
- 
-   
-    getcitypoint(cityTourism:HttpParams):Observable<Name[]>{
-      return this.http.get<Name[]>(this.url,{params:cityTourism});
+    private handleError(error: HttpErrorResponse) {
+      if (error.error instanceof ErrorEvent) {
+        // A client-side or network error occurred. Handle it accordingly.
+        console.error('An error occurred:', error.error.message);
+      } else {
+        // The backend returned an unsuccessful response code.
+        // The response body may contain clues as to what went wrong.
+        console.error(
+          `Backend returned code ${error.status}, ` +
+          `body was: ${error.error}`);
+      }
+      // Return an observable with a user-facing error message.
+      return throwError(
+        'Something bad happened; please try again later.');
     }
-   
+    
+    
+    getcitypoint(cityTourism:HttpParams):Observable<Name[]>{
+      let url=`http://localhost:8080/AngularConnect/json/getcitypoint.do`;
 
+      return this.http.get<Name[]>(url,{params:cityTourism});
+    }
+
+    findDays(owner: String): Observable<days[]>{
+      let url=`http://localhost:8080/findDays/${owner}`;
+
+      return this.http.get<days[]>(url);
+    }
+
+    addDays(days: dayAdd[]): Observable<dayAdd[]>{
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          Authorization: 'my-auth-token'
+        }),
+        withCredential: false
+      };
+      let url="http://localhost:8080/days/doInsert";
+      return this.http.post<dayAdd[]>(url, days, httpOptions)
+    }
+    
+    addTitle(params: journeys):Observable<journeys>{
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          Authorization: 'my-auth-token',
+        }),
+        withCredential: false
+      };
+      let url = "http://localhost:8080/journeys/selectTitleId"
+      return this.http.post<journeys>(url,params,httpOptions)
+    }
+
+    dayDel(titleId: number): Observable<{}>{
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          Authorization: 'my-auth-token',
+        }),
+        withCredential: false
+      };
+      const url = `http://localhost:8080/days/doDelete/${titleId}`;
+      return this.http.delete(url, httpOptions)
+      // .pipe(
+      //   catchError(this.handleError('deleteTitle'))
+      // );
+    }
   
   }

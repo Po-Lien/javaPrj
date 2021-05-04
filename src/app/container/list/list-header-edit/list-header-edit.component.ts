@@ -33,7 +33,7 @@ export class ListHeaderEditComponent implements OnInit {
       this.titleId = this.route.snapshot.params["titleId"];
 
       this.listService.sharedIsChecked.subscribe(isChecked => this.isChecked = isChecked);
-      this.listService.sharedDayTestSubject.subscribe(dayTest => this.dayTest = dayTest.filter(list => list.titleId === this.titleId))
+      this.listService.sharedDayTestSubject.subscribe(dayTest => this.dayTest = dayTest)//.filter(list => list.titleId === this.titleId))
       
       this.Title = this.dayTest[0].title;
 
@@ -41,7 +41,8 @@ export class ListHeaderEditComponent implements OnInit {
           {
             date: list.date,
             day: list.day,
-            week: list.week
+            week: list.week,
+            tourism: list.tourism
           }
       ));
       
@@ -56,27 +57,34 @@ export class ListHeaderEditComponent implements OnInit {
   
   ngOnInit(): void {
   }
-  
+
   isChange() {
     let changeAll = new Array;
     let changeDate = new Array;
+    let addTourism = new Array;
     let changeDayAll = new Array
     for( let i = 0; i < this.day.length; i++){
       let currentDate = new Date(this.fromDate);
       if(i == 0){
         let weekday = currentDate.getDay();
         let week = this.listService.changeToWeek(weekday);
+
+        addTourism.push(
+          {
+            startTime: '8:00',
+            endTime: '',
+            forcastTime: '',
+            place: '',
+            address: ''
+          }
+        )
         
         changeDayAll.push(
           {
             date: this.fromDate,
             day: '第一天',
             week: week,
-            startTime: '8:00',
-            endTime: '',
-            forcastTime: '',
-            place: '',
-            address: ''
+            tourism: addTourism
           }
         )
         changeDate.push(this.fromDate);
@@ -87,16 +95,22 @@ export class ListHeaderEditComponent implements OnInit {
           let weekday = currentDate.getDay();
           let week = this.listService.changeToWeek(weekday);
           
-          changeDayAll.push(
+          addTourism.push(
             {
-              date: nextDate,
-              day: '第' + days + '天',
-              week: week,
               startTime: '8:00',
               endTime: '',
               forcastTime: '',
               place: '',
               address: ''
+            }
+          )
+
+          changeDayAll.push(
+            {
+              date: nextDate,
+              day: '第' + days + '天',
+              week: week,
+              toursim: addTourism
             }
           )
           changeDate.push(nextDate);
@@ -119,9 +133,12 @@ export class ListHeaderEditComponent implements OnInit {
   }
 
   sendIsChecked(): void {
+    this.dayTest[0].title = this.Title;
+    this.dayTest[0].day = this.day;
+    //console.log(this.dayTest);
     this.listService.isCheckedSubject.next(false);
     //this.listService.daySubject.next(this.day);
-    this.listService.titleSubject.next(this.Title);
+    //this.listService.titleSubject.next(this.Title);
     this.listService.dayTestSubject.next(this.dayTest);
   }
 
@@ -131,7 +148,12 @@ export class ListHeaderEditComponent implements OnInit {
   }
 
   addTab(index: number) {
-    let selectedCN: string = this.listService.changeToCN(index + 1);
+    let selectedCN: string
+    if(index == 0){
+      selectedCN = this.listService.changeToCN(index + 2);
+    }else{
+      selectedCN = this.listService.changeToCN(index + 1);
+    }
     
     let currentDate = new Date(this.endDate);
     let nextDate = new Date(currentDate.setDate(currentDate.getDate() + 1)).toISOString().split('T')[0];
@@ -139,20 +161,26 @@ export class ListHeaderEditComponent implements OnInit {
     let weekday = currentDate.getDay();
     let week = this.listService.changeToWeek(weekday);
 
-    this.dayTest.map(data => Object.values(data)[4]).push({
-      date: nextDate,
-      day: '第'+ selectedCN +'天',
-      week: week,
+    let addTourism = new Array;
+
+    addTourism.push({
       startTime: '8:00',
       endTime: '',
       forcastTime: '',
       place: '',
       address: ''
+    })
+
+    this.day.push({
+      date: nextDate,
+      day: '第'+ selectedCN +'天',
+      week: week,
+      tourism: addTourism
     });
     this.date.push(
       nextDate
     );
-    this.day = this.dayTest.map(data => Object.values(data)[4]);
+    //this.day = this.dayTest.day.map(data => Object.values(data)[4]);
     this.selected = this.day.length;
     this.endDate = this.date[this.selected - 1];
   }
@@ -160,15 +188,17 @@ export class ListHeaderEditComponent implements OnInit {
   removeTab(index: number) {
     if(index == this.selected - 1)
     {
-      this.dayTest.map(data => Object.values(data)[4]).splice(index, 1);
+      //this.dayTest.map(data => Object.values(data)[4]).splice(index, 1);
       this.date.splice(index, 1);
-      this.day = this.dayTest.map(data => Object.values(data)[4]);
+      //this.day = this.dayTest.map(data => Object.values(data)[4]);
+      this.day.splice(index, 1);
       this.selected = this.day.length;
       this.endDate = this.date[this.selected - 1];
     }else{
-      this.dayTest.map(data => Object.values(data)[4]).splice(this.day.length - 1, 1);
+      //this.dayTest.map(data => Object.values(data)[4]).splice(this.day.length - 1, 1);
       this.date.splice(this.date.length - 1, 1);
-      this.day = this.dayTest.map(data => Object.values(data)[4]);
+      //this.day = this.dayTest.map(data => Object.values(data)[4]);
+      this.day.splice(this.day.length - 1, 1);
       this.selected = this.day.length;
       this.endDate = this.date[this.selected - 1];
     }

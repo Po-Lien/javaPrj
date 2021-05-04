@@ -1,4 +1,8 @@
-.tab {
+.tab1 {
+    max-width: 960px;
+    margin: 0px auto 0 auto;
+}
+.tab2 {
     max-width: 960px;
     margin: 40px auto 0 auto;
 }
@@ -19,8 +23,8 @@
     font-size: 16px !important;
 }
 
-:host::ng-deep.mat-card{
+/* :host::ng-deep.mat-card{
     height: 100px !important;
     width: 200px !important;
     margin: 10px;
-}
+} */
