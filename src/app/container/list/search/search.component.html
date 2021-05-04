@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <a routerLink="/schedule/{{titleId}}" skipLocationChange color="primary" *ngIf="!isChecked">
     <button mat-button style="position: absolute; min-width: 39px; outline:none;" class="create-venu-tab-back">
         <mat-icon style="margin-left:4px;">arrow_back</mat-icon>
@@ -71,3 +72,77 @@
 </mat-tab-group>
 <!--<router-outlet></router-outlet>-->
 <app-search-content></app-search-content>
+=======
+<a routerLink="/schedule" skipLocationChange color="primary" *ngIf="!isChecked">
+    <button mat-button style="position: absolute; min-width: 39px; outline:none;" class="create-venu-tab-back">
+        <mat-icon style="margin-left:4px;">arrow_back</mat-icon>
+    </button>
+</a>
+<a routerLink="/schedule/edit" skipLocationChange color="primary" *ngIf="isChecked" >
+    <button mat-button style="position: absolute; min-width: 39px; outline:none;" class="create-venu-tab-back">
+        <mat-icon style="margin-left:4px;">arrow_back</mat-icon>
+    </button>
+</a>
+<mat-tab-group mat-align-tabs="end" class="create-venu-tab">
+    <mat-tab>
+        <ng-template mat-tab-label>
+                <button mat-icon-button>
+                <mat-icon style="margin-left: 9px;">search</mat-icon><br>
+                <p style="margin: -4px; right: 1px; position: relative;">搜尋</p>
+                </button>
+        </ng-template>
+        <div class="mat-tab-body-wrapper">
+            <div class="my-collections-list">
+                <div class="search-box-city-group">
+                    <span><mat-icon class="search-box-city-icon">place</mat-icon></span>
+                    <input  type="text"
+                            placeholder="請輸入城市"
+                            aria-label=""
+                            [formControl]="myControl"
+                            [matAutocomplete]="auto"
+                            class="search-box-city">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let contry of contry" [value]="contry">
+                            {{contry}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </div>
+                <div class="search-box-text">
+                    <input  type="text"
+                            placeholder="請輸入景點"
+                            [formControl]="myControlPlace"
+                            [matAutocomplete]="autoPlace"
+                            class="search-box">
+                    <mat-autocomplete autoActiveSecondOption #autoPlace="matAutocomplete">
+                        <mat-option *ngFor="let place of place" [value]="place">
+                            {{place}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <button mat-raised-button color="primary" class="button" style="height: 44px" (click)="onSubmitCityTourism()">
+                        搜尋
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <button mat-icon-button>
+                <mat-icon style="margin-left: 5px; margin: 1px">place</mat-icon>
+                <p style="margin: 8px; right: 31px; position: relative;">我的景點收藏</p>
+            </button>
+        </ng-template>
+        2
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <button mat-icon-button>
+                <mat-icon style="margin-left: 7px;">edit</mat-icon><br>
+                <p style="margin: -2px; position: relative; right: 4px;">自訂景點</p>
+            </button>
+        </ng-template>
+        3
+    </mat-tab>
+</mat-tab-group>
+<router-outlet></router-outlet>
+>>>>>>> ddc21a131312db80ff3c782a51e13cf9724c86fb

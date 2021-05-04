@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <mat-toolbar color="primary" fxLayoutAlign="space-between center">
         <div>
             <a class="nav-item nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="font-size: 30px;" *ngIf="(deviceLg || deviceXl)">Journey</a>
@@ -45,3 +46,52 @@
         <span>Logout</span>
     </a>
 </mat-menu>
+=======
+<mat-toolbar color="primary" fxLayoutAlign="space-between center">
+        <div>
+            <a class="nav-item nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="font-size: 30px;" *ngIf="(deviceLg || deviceXl)">Journey</a>
+        </div>
+        <div>
+            <a class="nav-item nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="font-size: 30px;" *ngIf="!(deviceLg || deviceXl)">Journey</a>
+        </div>
+        <div fxLayout="row">
+                <a class="nav-item nav-link" *ngIf="!user" routerLink="/account/login">
+                    <mat-icon>login</mat-icon>
+                </a>
+                <a class="nav-item nav-link" style="font-family: 'Noto Sans TC',sans-serif;" *ngIf="user && !deviceXs" routerLink="/trips">
+                    <span>行程</span>
+                </a>
+                <a class="nav-item nav-link" *ngIf="user && !deviceXs" routerLink="/users" routerLinkActive="active">
+                    Users
+                </a>
+                <a class="nav-item nav-link" *ngIf="user && !deviceXs" (click)="logout()">
+                    <mat-icon>exit_to_app</mat-icon>
+                </a>
+                <a class="nav-item nav-link" *ngIf="deviceXs" [mat-menu-trigger-for]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </a>
+        </div>
+</mat-toolbar>
+<mat-menu #menu="matMenu">
+    <a class="nav-item nav-link-menu" mat-menu-item routerLink="" fxLayoutAlign="space-around center" >
+        <mat-icon >home</mat-icon>
+        <span>Home</span>
+    </a>
+    <a class="nav-item nav-link-menu" mat-menu-item *ngIf="user" routerLink="/trips" fxLayoutAlign="space-around center" >
+        <mat-icon>event_note</mat-icon>
+        <span>行程</span>
+    </a>
+    <a class="nav-item nav-link-menu" mat-menu-item *ngIf="user" routerLink="/users" fxLayoutAlign="space-around center" >
+        <mat-icon>group</mat-icon>
+        <span>Users</span>
+    </a>
+    <a class="nav-item nav-link-menu" mat-menu-item *ngIf="!user" routerLink="/account/login" fxLayoutAlign="space-around center" >
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+    </a>
+    <a class="nav-item nav-link-menu" mat-menu-item *ngIf="user" (click)="logout()" fxLayoutAlign="space-around center" >
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+    </a>
+</mat-menu>
+>>>>>>> ddc21a131312db80ff3c782a51e13cf9724c86fb
